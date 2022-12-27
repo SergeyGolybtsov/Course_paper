@@ -4,9 +4,8 @@ public class Employee {
     private String surName;
     private String patronymic;
     private int salary;
-    private Integer department;
+    private int department;
     private static int counter = 1;
-    private Integer percent;
 
     //Условие
     public Employee(String name, String surName, String patronymic, int salary, int department) {
@@ -46,7 +45,7 @@ public class Employee {
     }
 
     public int getSalary(int i) {
-        return 0;
+        return salary;
     }
 
     public int getDepartment() {
@@ -76,6 +75,9 @@ public class Employee {
     public String toStringSalary() {
         return surName + " " + name + " " + patronymic + " Зарплата " + salary;
 
+    }
+    public String toStringFullName() {
+        return surName + " " + name + " " + patronymic;
     }
 }
 

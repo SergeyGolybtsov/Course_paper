@@ -1,5 +1,5 @@
 public class Main {
-    public static Employee[] employees = new Employee[10];
+    private static Employee[] employees = new Employee[10];
 
     public static void main(String[] args) {
 
@@ -24,9 +24,9 @@ public class Main {
         System.out.println();
         System.out.println("Сумма затрат на З/П в месяц: " + findSumSalary());
         System.out.println();
-        findMinSalary();
+        System.out.println("Cотрудник с минимальной зарплатой: " + findMinSalary());
         System.out.println();
-        findMaxSalary();
+        System.out.println(("Cотрудник с максимальной зарплатой: ") + findMaxSalary());
         System.out.println();
         System.out.println("Среднее значение зарплаты: " + findAverageSalary());
         System.out.println();
@@ -40,7 +40,7 @@ public class Main {
         System.out.println();
         System.out.println("Среднюю зарплату по отделу: " + findAverageSalaryByDepartment(5));
         System.out.println();
-        printSalaryCostsByDepartment(3);
+        System.out.println("Затрат на зарплату по отделу: " + findSalaryCostsByDepartment(3));
         System.out.println();
         indexTheSalaryOfAllEmployees(3, 1);
         printEmployeesWithSalaryLessThanTheNumber(12400);
@@ -65,28 +65,28 @@ public class Main {
         return salarySum;
     }
 
-    public static void findMinSalary() {
-        String fullName = "";
+    public static Employee findMinSalary() {
+        Employee tempEmployee = null;
         double minSalary = Double.MAX_VALUE;
         for (Employee employee : employees) {
             if (minSalary >= employee.getSalary()) {
                 minSalary = employee.getSalary();
-                fullName = employee.getSurName() + " " + employee.getName() + " " + employee.getPatronymic();
+                tempEmployee = employee;
             }
         }
-        System.out.println("Cотрудник с минимальной зарплатой: " + fullName + " " + minSalary);
+        return tempEmployee;
     }
 
-    public static void findMaxSalary() {
-        String fullName = "";
+    public static Employee findMaxSalary() {
+        Employee tempEmployee = null;
         double maxSalary = Double.MIN_VALUE;
         for (Employee employee : employees) {
             if (maxSalary <= employee.getSalary()) {
                 maxSalary = employee.getSalary();
-                fullName = employee.getSurName() + " " + employee.getName() + " " + employee.getPatronymic();
+                tempEmployee = employee;
             }
         }
-        System.out.println("Cотрудник с максимальной зарплатой: " + fullName + " " + maxSalary);
+        return tempEmployee;
     }
 
     public static double findAverageSalary() {
@@ -118,47 +118,47 @@ public class Main {
 
     //Продолжение следует(((
 
-    public static String findMinSalaryDepartment(int department) {
+    public static Employee findMinSalaryDepartment(int department) {
         int minSalary = Integer.MAX_VALUE;
-        String result = null;
+        Employee result = null;
         for (Employee employee : employees) {
             if (employee.getDepartment() != department) {
                 continue;
             }
             if (employee.getSalary() < minSalary) {
                 minSalary = employee.getSalary();
-                result = employee.toStringSalary();
+                result = employee;
             }
         }
         return result;
     }
 
-    public static String findMaxSalaryDepartment(int department) {
+    public static Employee findMaxSalaryDepartment(int department) {
         int maxSalary = Integer.MIN_VALUE;
-        String result = null;
+        Employee result = null;
         for (Employee employee : employees) {
             if (employee.getDepartment() != department) {
                 continue;
             }
             if (employee.getSalary() > maxSalary) {
                 maxSalary = employee.getSalary();
-                result = employee.toStringSalary();
+                result = employee;
             }
         }
         return result;
     }
 
-    public static void printSalaryCostsByDepartment(int deportment) {
+    public static int findSalaryCostsByDepartment(int deportment) {
         int sum = 0;
         for (Employee employee : employees) {
             if (employee.getDepartment() == deportment) {
                 sum += employee.getSalary();
             }
         }
-        System.out.println("Затрат на зарплату по " + deportment + " отделу: " + sum);
+        return sum;
     }
 
-    public static int findAverageSalaryByDepartment(int department) {
+    public static float findAverageSalaryByDepartment(int department) {
         int members = 0;
         int sum = 0;
         for (Employee employee : employees) {
@@ -167,7 +167,7 @@ public class Main {
                 members += 1;
             }
         }
-        return sum / members;
+        return sum / (float) members;
     }
 
     public static void indexTheSalaryOfAllEmployees(int percent, int department) {
@@ -178,7 +178,6 @@ public class Main {
                 System.out.println(employee.toStringNotDepartment());
             }
         }
-
     }
 
     public static void printEmployeesWithSalaryLessThanTheNumber(int salary) {
